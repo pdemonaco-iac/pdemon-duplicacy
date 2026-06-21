@@ -1,10 +1,15 @@
 name: 75 - Release - Generate Tag & Changelog
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
 jobs:
   release:
     name: 75 - Release - Generate Tag & Changelog
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -12,7 +17,7 @@ jobs:
       TARGET_BRANCH: ${{ github.ref_name }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -37,25 +42,30 @@ jobs:
           bundle config set --local with 'development release_prep'
           bundle install --jobs 4 --retry 3
 
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Generate REFERENCE.md
         run: |
           bundle exec rake strings:generate:reference
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain REFERENCE.md)" ]; then
             git add REFERENCE.md
             git commit -m "docs(reference): update REFERENCE.md"
           fi
 
       - name: Generate changelog
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --verbose --tag ${{ env.RELEASE_TAG }}
         env:
-          CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bundle exec rake changelog
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
 
       - name: Commit changelog
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain CHANGELOG.md)" ]; then
             git add CHANGELOG.md
             git commit -m "chore(changelog): update ${RELEASE_VERSION} changelog"
@@ -73,3 +83,18 @@ jobs:
         run: |
           git push origin "HEAD:${TARGET_BRANCH}"
           git push origin "${RELEASE_TAG}"
+
+      - name: Install PDK
+        run: gem install pdk
+
+      # Temporary, uncommitted edit: runs after the push above so it is never
+      # committed. It only affects the working tree that pdk builds into the
+      # release tarball, so the published README badges reference the tag.
+      - name: Point README badges at release tag (not committed)
+        run: |
+          sed -i "s#\(check-runs/[^?)]*\)/master#\1/${RELEASE_TAG}#g" README.md
+
+      - name: Build and publish module to Puppet Forge
+        env:
+          PDK_FORGE_TOKEN: ${{ secrets.PUPPET_FORGE_PUBLISH_API }}
+        run: pdk release publish --force
