@@ -1,6 +1,7 @@
 # duplicacy
 
-[![CI](https://github.com/pdemonaco-iac/pdemon-duplicacy/actions/workflows/50_pdk.yml/badge.svg?branch=master)](https://github.com/pdemonaco-iac/pdemon-duplicacy/actions/workflows/50_pdk.yml)
+[![CI](https://img.shields.io/github/check-runs/pdemonaco-iac/pdemon-duplicacy/master?style=flat-square)](https://github.com/pdemonaco-iac/pdemon-duplicacy/actions/workflows/20_pdk.yml)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/pdemon/duplicacy.svg?style=flat-square)](https://forge.puppetlabs.com/pdemon/duplicacy)
 
 #### Table of Contents
 

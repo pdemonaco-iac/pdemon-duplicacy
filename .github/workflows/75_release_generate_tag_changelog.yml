@@ -83,3 +83,18 @@ jobs:
         run: |
           git push origin "HEAD:${TARGET_BRANCH}"
           git push origin "${RELEASE_TAG}"
+
+      - name: Install PDK
+        run: gem install pdk
+
+      # Temporary, uncommitted edit: runs after the push above so it is never
+      # committed. It only affects the working tree that pdk builds into the
+      # release tarball, so the published README badges reference the tag.
+      - name: Point README badges at release tag (not committed)
+        run: |
+          sed -i "s#\(check-runs/[^?)]*\)/master#\1/${RELEASE_TAG}#g" README.md
+
+      - name: Build and publish module to Puppet Forge
+        env:
+          PDK_FORGE_TOKEN: ${{ secrets.PUPPET_FORGE_PUBLISH_API }}
+        run: pdk release publish --force
