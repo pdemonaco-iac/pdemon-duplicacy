@@ -111,4 +111,4 @@ jobs:
       - name: Build and publish module to Puppet Forge
         env:
           PDK_FORGE_TOKEN: ${{ secrets.PUPPET_FORGE_PUBLISH_API }}
-        run: pdk release publish --force
+        run: pdk build && pdk release publish --force
