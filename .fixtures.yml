@@ -8,4 +8,4 @@ fixtures:
        ref: '9.7.0'
      cron_core:
        repo: 'puppetlabs/cron_core'
-       ref: '1.3.0'
+       ref: '2.0.2'
