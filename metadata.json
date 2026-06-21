@@ -4,9 +4,9 @@
   "author": "Phil DeMonaco",
   "summary": "Module to manage duplicacy backups.",
   "license": "MIT",
-  "source": "https://github.com/pdemonaco/pdemon-duplicacy",
-  "project_page": "https://github.com/pdemonaco/pdemon-duplicacy",
-  "issues_url": "https://github.com/pdemonaco/pdemon-duplicacy/issues",
+  "source": "https://github.com/pdemonaco-iac/pdemon-duplicacy",
+  "project_page": "https://github.com/pdemonaco-iac/pdemon-duplicacy",
+  "issues_url": "https://github.com/pdemonaco-iac/pdemon-duplicacy/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",

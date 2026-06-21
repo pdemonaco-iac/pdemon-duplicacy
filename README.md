@@ -1,6 +1,6 @@
 # duplicacy
 
-[![CI](https://github.com/pdemonaco/pdemon-duplicacy/actions/workflows/50_pdk.yml/badge.svg?branch=master)](https://github.com/pdemonaco/pdemon-duplicacy/actions/workflows/50_pdk.yml)
+[![CI](https://github.com/pdemonaco-iac/pdemon-duplicacy/actions/workflows/50_pdk.yml/badge.svg?branch=master)](https://github.com/pdemonaco-iac/pdemon-duplicacy/actions/workflows/50_pdk.yml)
 
 #### Table of Contents
 
