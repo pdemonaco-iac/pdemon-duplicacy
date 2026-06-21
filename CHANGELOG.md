@@ -2,17 +2,17 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v1.1.0](https://github.com/pdemonaco/pdemon-duplicacy/tree/v1.1.0) (2025-11-16)
+## [1.1.0](https://github.com/pdemonaco/pdemon-duplicacy/tree/1.1.0) (2025-11-16)
 
-[Full Changelog](https://github.com/pdemonaco/pdemon-duplicacy/compare/v1.0.0...v1.1.0)
+[Full Changelog](https://github.com/pdemonaco/pdemon-duplicacy/compare/1.0.0...1.1.0)
 
 ### UNCATEGORIZED PRS; LABEL THEM ON GITHUB
 
 - feat: optional package management [\#6](https://github.com/pdemonaco/pdemon-duplicacy/pull/6) ([pdemonaco](https://github.com/pdemonaco))
 
-## [v1.0.0](https://github.com/pdemonaco/pdemon-duplicacy/tree/v1.0.0) (2025-11-15)
+## [1.0.0](https://github.com/pdemonaco/pdemon-duplicacy/tree/1.0.0) (2025-11-15)
 
-[Full Changelog](https://github.com/pdemonaco/pdemon-duplicacy/compare/0.1.0-rc4...v1.0.0)
+[Full Changelog](https://github.com/pdemonaco/pdemon-duplicacy/compare/0.1.0-rc4...1.0.0)
 
 ### Added
 

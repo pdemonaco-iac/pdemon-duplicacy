@@ -9,7 +9,7 @@ on:
 
 jobs:
   commitlint:
-    name: 15 - Commitlint
+    name: Commit Lint
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

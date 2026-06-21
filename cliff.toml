@@ -1,0 +1,44 @@
+# git-cliff configuration
+# Replaces github_changelog_generator (GitHub API format)
+# Categories match conventional commit types: feat, fix, maint
+
+[changelog]
+header = "# Changelog\n\n"
+body = """
+{% if commits | length == 0 %}{% else %}\
+{% if version %}\
+## [{{ version }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}\
+## [Unreleased]
+{% endif %}
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+{% for commit in commits %}
+- {% if commit.scope %}*({{ commit.scope }})* {% endif %}{{ commit.message | upper_first }}
+{% endfor %}
+{% endfor %}
+{% endif %}\
+"""
+footer = ""
+trim = true
+
+[git]
+conventional_commits = true
+filter_unconventional = false
+split_commits = false
+
+commit_parsers = [
+  { message = "^chore\\(changelog\\)", skip = true },
+  { message = "^docs\\(reference\\)", skip = true },
+  { message = "^feat", group = "Feature" },
+  { message = "^fix", group = "Bugfix" },
+  { message = "^maint", group = "Maintenance" },
+  { message = "^docs", group = "Documentation" },
+  { message = "^chore", group = "Chore" },
+  { message = "^refactor", group = "Refactor" },
+  { message = ".*", group = "Other" },
+]
+
+filter_commits = true
+tag_pattern = "[0-9]+\\.[0-9]+\\.[0-9]+"
+sort_commits = "oldest"
